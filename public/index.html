@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atlas ryb słodkowodnych</title>
+</head>
+<body>
+    <h1>Atlas ryb słodkowodnych Polski</h1>
+    <div id="fishList"></div>
+
+    <script>
+        fetch('http://localhost:3000')
+            .then(response => response.json())
+            .then(data => {
+                const list = document.getElementById('fishList');
+                data.forEach(fish => {
+                    const fishItem = document.createElement('p');
+                    fishItem.textContent = `${fish.name} - Okres ochronny: ${fish.protective_period}`;
+                    list.appendChild(fishItem);
+                });
+            })
+            .catch(error => console.error('Error:', error));
+    </script>
+</body>
+</html>
